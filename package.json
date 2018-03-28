@@ -4,6 +4,7 @@
   "description": "ReactJS Training (Luxsoft)",
   "main": "index.js",
   "scripts": {
+    "build": "node_modules/.bin/webpack --progress --colors --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/NikolayMarkin/reactjs-training#readme",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "webpack": "^3.11.0"
@@ -29,6 +31,10 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "create-react-class": "^15.6.3"
+    "create-react-class": "^15.6.3",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1"
   }
 }

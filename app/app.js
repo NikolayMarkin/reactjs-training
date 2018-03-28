@@ -1,25 +1,50 @@
-var app = React.createElement('div', {},
-    React.createElement('h1', {}, "Hi, I'm page header"),
-    React.createElement('div', {},
-        React.createElement('p', {}, "I'm staying at the begining of the page content"),
-        React.createElement('div', {},
-            React.createElement('span', "I'm user logo container"),
-            React.createElement('span', "I'm user name container")
-        ),
-        React.createElement('h2', {}, "I'm next section header"),
-        React.createElement('section', {},
-            React.createElement('article', {}, "I'm awesome article"),
-            React.createElement('ul', {},
-                React.createElement('li', {}, "I'm article item"),
-                React.createElement('li', {}, "I'm article item with ",
-                    React.createElement('b', {}, "bold element")
-                )
-            )
-        )
-    )
-);
+require("bootstrap/dist/css/bootstrap.css");
+import React from 'react';
+import {render} from 'react-dom';
 
-ReactDOM.render(
-    app,
+class GridComponent extends React.Component {
+    render() {
+        return (
+            <div>
+                <input type="text" placeholder="Filter by..."/>
+                <table className="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Active</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>
+                            <input type="checkbox" defaultChecked="true"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+}
+
+render(
+    <GridComponent/>,
     document.getElementById('app')
 );
