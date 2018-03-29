@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 class GridRecord extends React.Component {
 
@@ -15,5 +16,17 @@ class GridRecord extends React.Component {
         </tr>
     }
 }
+
+GridRecord.defaultProps = {
+    record: {firstName: "N/A", lastName: "N/A", active: false}
+};
+
+GridRecord.propTypes = {
+    record: PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        active: PropTypes.bool.isRequired
+    })
+};
 
 export default GridRecord;

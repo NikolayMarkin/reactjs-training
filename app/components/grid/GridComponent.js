@@ -15,8 +15,8 @@ class GridComponent extends React.Component {
             records: []
         }
     }
-
     componentDidMount() {
+        this.refs.filterInput && this.refs.filterInput.focus();
         this.setState({
             records: dataSource
         })
@@ -39,6 +39,14 @@ class GridComponent extends React.Component {
         })
     }
 
+    handleFilterChange(e){
+        let value = e.target.value,
+            records = dataSource.filter((record) => record.firstName.toUpperCase().includes(value.toUpperCase()));
+        this.setState({
+            records:records
+        });
+    }
+
     render() {
         let records = this.state.records.map((record) => {
             return <GridRecord record={record}/>
@@ -46,7 +54,7 @@ class GridComponent extends React.Component {
         return (
             <div style={{width: 300, height: 300, padding: 20}}>
                 <p>
-                    <input type="text" placeholder="Filter by..."/>
+                    <input type="text" ref="filterInput" placeholder="Filter by..." onChange={this.handleFilterChange.bind(this)}/>
                 </p>
                 <table className="table table-condensed">
                     <thead>
@@ -64,6 +72,8 @@ class GridComponent extends React.Component {
                     })}
                     </tbody>
                 </table>
+                <div>{this.props.children &&
+                    React.cloneElement(this.props.children, {records: this.state.records})}</div>
             </div>
         )
     }

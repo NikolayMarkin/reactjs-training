@@ -1,8 +1,9 @@
 import React from 'react';
 import {render} from 'react-dom';
-import GridComponent from './components/GridComponent.js';
+import UserDetailsComponent from "./components/user/UserDetailsComponent";
+
 
 render(
-    <GridComponent/>,
+    <UserDetailsComponent/>,
     document.getElementById('app')
 );
