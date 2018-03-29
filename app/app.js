@@ -1,48 +1,6 @@
-require("bootstrap/dist/css/bootstrap.css");
 import React from 'react';
 import {render} from 'react-dom';
-
-class GridComponent extends React.Component {
-    render() {
-        return (
-            <div>
-                <input type="text" placeholder="Filter by..."/>
-                <table className="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Active</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>
-                            <input type="checkbox"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>
-                            <input type="checkbox"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>
-                            <input type="checkbox" defaultChecked="true"/>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
-}
+import GridComponent from './components/GridComponent.js';
 
 render(
     <GridComponent/>,
