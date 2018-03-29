@@ -1,44 +1,25 @@
 require("bootstrap/dist/css/bootstrap.css");
 import React from "react";
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import GridRecord from './GridRecord'
-import {detailsRecords} from "../../data/dataStore";
 
 class GridComponent extends React.Component {
     constructor() {
         super();
-        this.state = {
-            records: []
-        }
     }
     componentDidMount() {
         this.refs.filterInput && this.refs.filterInput.focus();
-        this.setState({
-            records: detailsRecords
-        })
-    }
-
-    toggleActive(index) {
-        let {records} = this.state;
-        records[index].active = !records[index].active;
-        this.setState({
-            records: records
-        })
-    }
-
-    editLastName(index, newValue) {
-        let {records} = this.state;
-        records[index].lastName = newValue;
-
-        this.setState({
-            records: records
-        })
     }
 
     handleFilterChange(e){
-        let value = e.target.value,
-            records = detailsRecords.filter((record) => record.name.toUpperCase().includes(value.toUpperCase()));
-        this.setState({
-            records:records
+        let filterValue = e.target.value;
+
+        let {dispatch} = this.props;
+
+        dispatch({
+            type: "FILTER",
+            value: filterValue
         });
     }
 
@@ -57,10 +38,8 @@ class GridComponent extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.records.map((record, index) => {
-                        return <GridRecord record={record} key={index}
-                                           toggleActive={this.toggleActive.bind(this, index)}
-                                           editLastName={this.editLastName.bind(this, index)}/>
+                    {this.props.records.map((record, index)=>{
+                        return <GridRecord record={record} key={index}/>
                     })}
                     </tbody>
                 </table>
@@ -71,4 +50,16 @@ class GridComponent extends React.Component {
     }
 }
 
-export default GridComponent;
+GridComponent.propTypes = {
+    records: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state) {
+    return {
+        records: state.grid
+    }
+}
+
+export default connect(
+    mapStateToProps
+)(GridComponent)
