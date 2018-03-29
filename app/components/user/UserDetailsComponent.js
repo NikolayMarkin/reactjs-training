@@ -3,10 +3,30 @@ import UserSkillListComponent from "./UserSkillListComponent";
 require("bootstrap/dist/css/bootstrap.css");
 import React from "react";
 import UserAvatarComponent from './UserAvatarComponent'
+import {detailsRecords} from '../../data/dataStore'
 
 class UserDetailsComponent extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            user: undefined
+        }
+    }
+
+    componentDidMount() {
+        const id = this.props.params.id;
+        const user = detailsRecords.find(user => user.id == id);
+
+        this.setState(
+            {user: user}
+        )
+    }
+
     render() {
+        if (this.state.user === undefined) {
+            return (<div>404</div>)
+        }
         return (
         <div className="container">
             <div className="row">
@@ -14,12 +34,12 @@ class UserDetailsComponent extends React.Component {
                     <div className="well profile">
                         <div className="col-sm-12">
                             <div className="col-xs-12 col-sm-8">
-                                <h2>{this.props.user.name}</h2>
-                                <p><strong>About: </strong> {this.props.user.about} </p>
-                                <p><strong>Hobbies: </strong> {this.props.user.hobbies} </p>
-                                <UserSkillListComponent skills={this.props.user.skills}/>
+                                <h2>{this.state.user.name}</h2>
+                                <p><strong>About: </strong> {this.state.user.about} </p>
+                                <p><strong>Hobbies: </strong> {this.state.user.hobby} </p>
+                                <UserSkillListComponent skills={this.state.user.skills}/>
                             </div>
-                            <UserAvatarComponent avatar={this.props.user.avatar} />
+                            <UserAvatarComponent avatar={this.state.user.avatar} />
                         </div>
                     </div>
                 </div>
@@ -31,7 +51,7 @@ class UserDetailsComponent extends React.Component {
 
 UserDetailsComponent.defaultProps = {
     user: {
-        name: "Nicole Pearson",
+        name: "N/A",
         about: "Web Designer/UI",
         hobbies: "Read, out with friends, listen to music, draw and learn new things.",
         skills: ["html5", "css3", "jquery", "bootstrap3"],

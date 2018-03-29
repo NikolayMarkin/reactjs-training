@@ -1,12 +1,7 @@
 require("bootstrap/dist/css/bootstrap.css");
 import React from "react";
 import GridRecord from './GridRecord'
-
-const dataSource = [
-    {firstName: "John", lastName: "Doe", active: false},
-    {firstName: "Mary", lastName: "Moe", active: false},
-    {firstName: "Peter", lastName: "Noname", active: true}
-];
+import {detailsRecords} from "../../data/dataStore";
 
 class GridComponent extends React.Component {
     constructor() {
@@ -18,7 +13,7 @@ class GridComponent extends React.Component {
     componentDidMount() {
         this.refs.filterInput && this.refs.filterInput.focus();
         this.setState({
-            records: dataSource
+            records: detailsRecords
         })
     }
 
@@ -41,16 +36,13 @@ class GridComponent extends React.Component {
 
     handleFilterChange(e){
         let value = e.target.value,
-            records = dataSource.filter((record) => record.firstName.toUpperCase().includes(value.toUpperCase()));
+            records = detailsRecords.filter((record) => record.name.toUpperCase().includes(value.toUpperCase()));
         this.setState({
             records:records
         });
     }
 
     render() {
-        let records = this.state.records.map((record) => {
-            return <GridRecord record={record}/>
-        });
         return (
             <div style={{width: 300, height: 300, padding: 20}}>
                 <p>
@@ -59,9 +51,9 @@ class GridComponent extends React.Component {
                 <table className="table table-condensed">
                     <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Active</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>About</th>
                     </tr>
                     </thead>
                     <tbody>

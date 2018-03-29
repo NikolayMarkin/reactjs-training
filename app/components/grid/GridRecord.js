@@ -1,32 +1,20 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import {hashHistory} from 'react-router'
 
 class GridRecord extends React.Component {
-
-    handleLastNameChange(e){
-        this.props.editLastName(e.target.value);
+    showUserDetails(e){
+        e.preventDefault();
+        hashHistory.push(`/details/${this.props.record.id}`);
     }
 
     render() {
-        let {record} = this.props;
+        const record = this.props.record;
         return <tr>
-            <th>{record.firstName}</th>
-            <th><input type="text" defaultValue={record.lastName} onChange={this.handleLastNameChange.bind(this)}/></th>
-            <th><input type="checkbox" checked={record.active} onChange={this.props.toggleActive}/></th>
+            <th onClick={this.showUserDetails.bind(this)}><a href="#">{record.id}</a></th>
+            <th>{record.name}</th>
+            <th>{record.about}</th>
         </tr>
     }
 }
-
-GridRecord.defaultProps = {
-    record: {firstName: "N/A", lastName: "N/A", active: false}
-};
-
-GridRecord.propTypes = {
-    record: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        active: PropTypes.bool.isRequired
-    })
-};
 
 export default GridRecord;
