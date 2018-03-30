@@ -1,4 +1,4 @@
-import * as types from '../Constants'
+import * as types from '../constants'
 
 export function filterDetails(value) {
     return {
@@ -39,6 +39,24 @@ export function loadDataInGrid(){
         fetch('http://localhost:4730')
             .then(response => response.json())
             .then(json => dispatch(addData(json.detailsRecords)))
+            .then(() => dispatch(stopLoading()))
+    }
+}
+
+export function addDataInDetails(detailsRecords){
+    return {
+        type: types.ADD_DATA_IN_DETAILS,
+        value: detailsRecords
+    }
+}
+
+export function loadDataAndFilterDetails(id){
+    return (dispatch)=>{
+        dispatch(startLoading());
+        fetch('http://localhost:4730')
+            .then(response => response.json())
+            .then(json => dispatch(addDataInDetails(json.detailsRecords)))
+            .then(() => dispatch(filterDetails(id)))
             .then(() => dispatch(stopLoading()))
     }
 }

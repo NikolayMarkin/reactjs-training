@@ -2,7 +2,6 @@ require("bootstrap/dist/css/bootstrap.css");
 import UserSkillListComponent from "./UserSkillListComponent";
 import React from "react";
 import UserAvatarComponent from './UserAvatarComponent'
-import {detailsRecords} from '../../data/dataStore'
 
 class UserDetailComponent extends React.Component {
 

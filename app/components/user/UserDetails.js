@@ -3,21 +3,18 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 
 import UserDetailComponent from './UserDetailComponent';
-import {filterDetails} from '../../actions'
+import {loadDataAndFilterDetails} from '../../actions'
 
 class UserDetails extends React.Component {
-    componentDidMount() {
+    componentDidMount(){
+        console.log(this.props.params.id);
         const {dispatch} = this.props;
-        dispatch(filterDetails(this.props.params.id));
+        dispatch(loadDataAndFilterDetails(this.props.params.id));
     }
-
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps){
         const {dispatch} = this.props;
-        if (prevProps.params.id !== this.props.params.id) {
-            dispatch({
-                type: "FILTER_DETAILS",
-                value: this.props.params.id
-            })
+        if(prevProps.params.id!==this.props.params.id){
+            dispatch(loadDataAndFilterDetails(this.props.params.id));
         }
     }
 
@@ -38,7 +35,7 @@ UserDetails.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        details: state.details
+        details: state.details.records
     }
 }
 

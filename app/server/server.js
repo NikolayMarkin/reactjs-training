@@ -13,7 +13,7 @@ var detailsRecords = [{
     about: "Nice guy",
     hobby: "Likes drinking wine",
     skills: ["html", "javascript", "redux"],
-    avatar: "http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-4.jpg"
+    avatar: "http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-3.jpg"
 }, {
     id: 2,
     name: "Mary Moe",
@@ -40,7 +40,7 @@ function generateData() {
         about: "Generated About",
         hobby: "Generated Hobby",
         skills: ["G", "E", "N", "E", "R", "A", "T", "E", "D", id],
-        avatar: "http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-0.jpg"
+        avatar: "http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-4.jpg"
     });
 }
 
