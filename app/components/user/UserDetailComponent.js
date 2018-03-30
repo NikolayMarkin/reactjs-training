@@ -6,26 +6,8 @@ import {detailsRecords} from '../../data/dataStore'
 
 class UserDetailComponent extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            user: undefined
-        }
-    }
-
-    componentDidMount() {
-        const id = this.props.params.id;
-        const user = detailsRecords.find(user => user.id == id);
-
-        this.setState(
-            {user: user}
-        )
-    }
-
     render() {
-        if (this.state.user === undefined) {
-            return (<div>404</div>)
-        }
+        const {user} = this.props;
         return (
         <div className="container">
             <div className="row">
@@ -33,12 +15,12 @@ class UserDetailComponent extends React.Component {
                     <div className="well profile">
                         <div className="col-sm-12">
                             <div className="col-xs-12 col-sm-8">
-                                <h2>{this.state.user.name}</h2>
-                                <p><strong>About: </strong> {this.state.user.about} </p>
-                                <p><strong>Hobbies: </strong> {this.state.user.hobby} </p>
-                                <UserSkillListComponent skills={this.state.user.skills}/>
+                                <h2>{user.name}</h2>
+                                <p><strong>About: </strong> {user.about} </p>
+                                <p><strong>Hobbies: </strong> {user.hobby} </p>
+                                <UserSkillListComponent skills={user.skills}/>
                             </div>
-                            <UserAvatarComponent avatar={this.state.user.avatar} />
+                            <UserAvatarComponent avatar={user.avatar} />
                         </div>
                     </div>
                 </div>
@@ -47,15 +29,5 @@ class UserDetailComponent extends React.Component {
         )
     }
 }
-
-UserDetailComponent.defaultProps = {
-    user: {
-        name: "N/A",
-        about: "Web Designer/UI",
-        hobbies: "Read, out with friends, listen to music, draw and learn new things.",
-        skills: ["html5", "css3", "jquery", "bootstrap3"],
-        avatar: "http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-2.jpg"
-    }
-};
 
 export default UserDetailComponent;

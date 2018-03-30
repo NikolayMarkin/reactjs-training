@@ -29,9 +29,10 @@ export function grid(state = detailsRecords, action) {
 
 export function details(state = detailsRecords, action) {
     switch (action.type) {
-        case "FILTER":
-//I also do something on filter action
-            return state;
+        case "FILTER_DETAILS":
+            return action.value
+                ? detailsRecords.filter(record => record.id == action.value)
+                : detailsRecords;
         default:
             return state
     }

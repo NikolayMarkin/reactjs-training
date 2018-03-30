@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import { Router, Route, Link, hashHistory} from 'react-router'
 import configureStore from '../store/index';
 import UserDetailComponent from "../components/user/UserDetailComponent";
+import UserDetails from "../components/user/UserDetails";
 import GridComponent from "../components/grid/GridComponent";
 
 const store = configureStore();
@@ -28,8 +29,8 @@ render(
         <Router history={hashHistory}>
             <Route path="/" component={App}>
                 <Route path="grid" component={GridComponent}/>
-                <Route path="details" component={UserDetailComponent}>
-                    <Route path="/details/:id" component={UserDetailComponent}/>
+                <Route path="details" component={UserDetails}>
+                    <Route path="/details/:id" component={UserDetails}/>
                 </Route>
             </Route>
         </Router>
