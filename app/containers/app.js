@@ -3,7 +3,6 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import { Router, Route, Link, hashHistory} from 'react-router'
 import configureStore from '../store/index';
-import UserDetailComponent from "../components/user/UserDetailComponent";
 import UserDetails from "../components/user/UserDetails";
 import GridComponent from "../components/grid/GridComponent";
 

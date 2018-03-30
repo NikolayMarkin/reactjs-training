@@ -1,18 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux'
-
-import UserDetailComponent from './UserDetailComponent';
 import PropTypes from 'prop-types';
 
+import UserDetailComponent from './UserDetailComponent';
+import {filterDetails} from '../../actions'
 
 class UserDetails extends React.Component {
-
     componentDidMount() {
         const {dispatch} = this.props;
-        dispatch({
-            type: "FILTER_DETAILS",
-            value: this.props.params.id
-        });
+        dispatch(filterDetails(this.props.params.id));
     }
 
     componentDidUpdate(prevProps) {

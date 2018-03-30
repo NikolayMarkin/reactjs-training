@@ -1,33 +1,35 @@
 require("bootstrap/dist/css/bootstrap.css");
 import React from "react";
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import GridRecord from './GridRecord'
+import {filterGrid, loadDataInGrid} from '../../actions'
 
 class GridComponent extends React.Component {
-    constructor() {
-        super();
-    }
     componentDidMount() {
         this.refs.filterInput && this.refs.filterInput.focus();
+        this.loadData();
     }
 
-    handleFilterChange(e){
-        let filterValue = e.target.value;
-
+    loadData() {
         let {dispatch} = this.props;
+        dispatch(loadDataInGrid());
+    }
 
-        dispatch({
-            type: "FILTER",
-            value: filterValue
-        });
+    handleFilterChange(e) {
+        const {dispatch} = this.props;
+        dispatch(filterGrid(e.target.value));
     }
 
     render() {
+        const recordsToShow = this.props.records
+            .filter((record)=>this.props.filtered.indexOf(record.id)==-1);
+
         return (
             <div style={{width: 300, height: 300, padding: 20}}>
                 <p>
-                    <input type="text" ref="filterInput" placeholder="Filter by..." onChange={this.handleFilterChange.bind(this)}/>
+                    <input type="text" ref="filterInput" placeholder="Filter by..."
+                           onChange={this.handleFilterChange.bind(this)}/>
                 </p>
                 <table className="table table-condensed">
                     <thead>
@@ -38,25 +40,31 @@ class GridComponent extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.props.records.map((record, index)=>{
-                        return <GridRecord record={record} key={index}/>
-                    })}
+                    {
+                        recordsToShow.map(
+                            (record, index) => <GridRecord record={record} key={index}/>
+                        )
+                    }
                     </tbody>
                 </table>
                 <div>{this.props.children &&
-                    React.cloneElement(this.props.children, {records: this.state.records})}</div>
+                React.cloneElement(this.props.children, {records: this.state.records})}</div>
             </div>
         )
     }
 }
 
 GridComponent.propTypes = {
-    records: PropTypes.array.isRequired
+    records: PropTypes.array.isRequired,
+    filtered: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        records: state.grid
+        records: state.grid.records,
+        filtered: state.grid.filtered,
+        loading: state.grid.loading
     }
 }
 
