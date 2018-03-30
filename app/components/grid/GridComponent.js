@@ -23,13 +23,13 @@ class GridComponent extends React.Component {
 
     render() {
         if (this.props.loading) {
-            return(
-                <div style={{width:300, height: 300, padding: 20}}>Loading...</div>
+            return (
+                <div style={{width: 300, height: 300, padding: 20}}>Loading...</div>
             );
         }
 
         const recordsToShow = this.props.records
-            .filter((record)=>this.props.filtered.indexOf(record.id)==-1);
+            .filter((record) => this.props.filtered.indexOf(record.id) == -1);
 
         return (
             <div style={{width: 300, height: 300, padding: 20}}>
@@ -66,14 +66,4 @@ GridComponent.propTypes = {
     loading: PropTypes.bool.isRequired
 };
 
-function mapStateToProps(state) {
-    return {
-        records: state.grid.records,
-        filtered: state.grid.filtered,
-        loading: state.grid.loading
-    }
-}
-
-export default connect(
-    mapStateToProps
-)(GridComponent)
+export default GridComponent;

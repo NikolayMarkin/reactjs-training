@@ -7,7 +7,6 @@ import {loadDataAndFilterDetails} from '../../actions'
 
 class UserDetails extends React.Component {
     componentDidMount(){
-        console.log(this.props.params.id);
         const {dispatch} = this.props;
         dispatch(loadDataAndFilterDetails(this.props.params.id));
     }
@@ -33,12 +32,4 @@ UserDetails.propTypes = {
     details: PropTypes.array.isRequired
 };
 
-function mapStateToProps(state) {
-    return {
-        details: state.details.records
-    }
-}
-
-export default connect(
-    mapStateToProps
-)(UserDetails)
+export default UserDetails;
